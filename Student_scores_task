@@ -1,0 +1,53 @@
+# Sparks-Foundation-tasks
+
+/* Creating a liibrary for our project */
+libname Proj1 "/folders/myfolders/myprograms";
+
+
+/* Using a .csv file in sas given that the reffile is in our sas folder(myprograms)*/
+filename reffile "/folders/myfolders/myprograms/Student_Scores.csv";
+
+proc import datafile=reffile out=proj1.Student_scores
+dbms=csv replace;
+run; 
+
+
+/* Checking our file variables and it's data types */
+proc contents data=proj1.student_scores;
+run;
+
+/* Checking if any anomalies in our dataset */
+proc means data=proj1.student_scores nmiss mean median ;
+run;
+
+/* Checking the occurence of our variable values */
+proc freq data=proj1.student_scores;
+tables _All_;
+run;
+
+
+/* Descriptive statistics on our dataset which is not so large */
+proc univariate data=proj1.student_scores;
+run;
+
+
+/* Using Scatter plot to understand the relationship between variables and we can say that they are highly co-related */
+proc sgplot data=PROJ1.STUDENT_SCORES;
+	reg x=Hours y=Scores /  ;
+	scatter x=Hours y=Scores /;
+	xaxis grid;
+	yaxis grid;
+run;
+
+
+/* Checking for outliers in our dataset */
+proc sgplot data=PROJ1.STUDENT_SCORES;
+	vbox Scores /;
+	yaxis grid;
+run;
+
+/* Applying the model and checking the evaluation parameters */
+proc reg data=PROJ1.STUDENT_SCORES alpha=0.05 plots(only label)=(
+		 fitplot observedbypredicted dffits dfbetas );
+	model Scores=Hours /;
+run;

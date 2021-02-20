@@ -3,7 +3,7 @@
 /*Project by-*/
 /*Anurag Singh*/
 
-/*Setting up my cas session and library for the dataset to use*/
+/*Setting up my cas(Cloud Analytic Services)session and library for the dataset to use*/
 
 cas session sessopts=(caslib=casuser);
 

@@ -1,0 +1,52 @@
+/*Project by-*/
+/*Anurag Singh*/
+
+/*Setting up my cas session and library for the dataset to use*/
+
+cas session sessopts=(caslib=casuser);
+
+libname casuser cas caslib=casuser;
+
+/*Using the file and bringing it in my cas enviornment for processing*/
+
+filename reffile "/home/studentIris.csv/";
+
+proc import datafile=reffile out=casout.iris
+dbms=csv replace;
+run;
+
+
+/*Checking the metadata of the dataset*/
+proc contents data=casuser.iris;
+run;
+
+/*Checking no of missing and various descriptive statistics for our dataset*/
+proc means data=casuser.iris nmiss mean median mode std var;
+run;
+
+/*Checking for outliers in the dataset by mentioning variables*/
+
+%let var=petalwidthcm;
+ods graphics / reset width=6.4in height=4.8in imagemap;
+
+proc sgplot data=casuser.iris ;
+vbox &var / ;
+yaxis grid;
+run;
+
+
+ods graphics reset;
+
+/*Using Decison tree algorithm on our dataset*/
+
+ods noproctitle;
+
+proc treesplit data=casuser.iris plots=(all);
+partition fraction(validate=0.3 seed=12345);
+input SepalLengthCm SepalWidthCm PetalLengthCm / level=interval;
+input Species / level=nominal;
+target PetalWidthCm / level=interval;
+grow rss;
+prune none;
+run;
+

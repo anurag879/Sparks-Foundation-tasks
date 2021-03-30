@@ -13,3 +13,8 @@ data analysis where we can predict the future from customer's past historical da
 * I understood the data and did data mining to make my data ready for EDA.
 * Understood the association/correlation between varibales.
 * Building a model around the dataset for determining percentage of students with respect to no. of study hour's.
+
+# [Project 3- Covid Analysis](https://public.tableau.com/profile/anurag.singh5723#!/vizhome/Weather_Events_Analysis_story_updated/Storytelling)
+* I have filtered the severity distributions with the help of states.
+* Severity with respect to start time and end time how they are distributed.
+* Total Severity in different weather and type of severity of how people are facing.
